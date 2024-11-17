@@ -136,18 +136,16 @@ class SmartConnect(object):
             self.reqsession = requests
 
         # Create a log folder based on the current date
-        log_folder = time.strftime("%Y-%m-%d", time.localtime())
-        log_folder_path = os.path.join(
-            "logs", log_folder
+        date = time.strftime("%Y-%m-%d", time.localtime())
+        log_path = os.path.join(
+            ".smartapi", "logs"
         )  # Construct the full path to the log folder
         os.makedirs(
-            log_folder_path, exist_ok=True
+            log_path, exist_ok=True
         )  # Create the log folder if it doesn't exist
-        log_path = os.path.join(
-            log_folder_path, "app.log"
-        )  # Construct the full path to the log file
+        log_file = os.path.join(log_path, f"{date}.log")
         logzero.logfile(
-            log_path, loglevel=logging.ERROR
+            log_file, loglevel=logging.ERROR
         )  # Output logs to a date-wise log file
 
         if pool:
